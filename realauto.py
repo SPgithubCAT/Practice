@@ -7,7 +7,7 @@ secret = "lynjwDcZXPZ98FmfgBPuwwcGfUQWzLBBqIPxXKMO"
 
 def get_target_price(ticker, k):
     """변동성 돌파 전략으로 매수 목표가 조회"""
-    df = pyupbit.get_ohlcv(ticker, interval="minute5", count=100)
+    df = pyupbit.get_ohlcv(ticker, interval="minute60", count=100)
     target_price = df.iloc[0]['close'] + (df.iloc[0]['high'] - df.iloc[0]['low']) * k
     return target_price
 
@@ -32,7 +32,7 @@ def get_current_price(ticker):
     return pyupbit.get_orderbook(tickers=ticker)[0]["orderbook_units"][0]["ask_price"]
 
 
-df2 = pyupbit.get_ohlcv("KRW-ADA", interval="minute5", count=100)
+df2 = pyupbit.get_ohlcv("KRW-ADA", interval="minute60", count=100)
 df2['FastK'] = (df2['close'] - df2['low'].rolling(14).min()) / (df2['high'].rolling(14).max() - df2['low'].rolling(14).min()) * 100
 df2['SlowK'] = df2['FastK'].rolling(3).mean()
 df2['SlowD'] = df2['SlowK'].rolling(3).mean()
