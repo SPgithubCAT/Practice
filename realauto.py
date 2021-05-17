@@ -3,8 +3,8 @@ import pyupbit
 import datetime
 import numpy as np
 
-access = "YdCCrkQhmfJVMa9MvF2yOO8R217dlPmwjjWST3xm"
-secret = "lynjwDcZXPZ98FmfgBPuwwcGfUQWzLBBqIPxXKMO"
+access = ""
+secret = ""
 
 
 set_ticker = "ADA"
