@@ -3,14 +3,14 @@ import pyupbit
 import datetime
 import numpy as np
 
-access = ""
-secret = ""
+access = "YdCCrkQhmfJVMa9MvF2yOO8R217dlPmwjjWST3xm"
+secret = "lynjwDcZXPZ98FmfgBPuwwcGfUQWzLBBqIPxXKMO"
 
 
 set_ticker = "ADA"
 
 set_time = "minute"
-set_time_num = 15       # ------------------------------------------------------------------------------------------------------------ default and end time
+set_time_num = 5       # ------------------------------------------------------------------------------------------------------------ default and end time
 set_count = 100
 kk = 0.4
 
@@ -57,10 +57,10 @@ def get_current_price(ticker):
     """현재가 조회"""
     return pyupbit.get_orderbook(tickers=ticker)[0]["orderbook_units"][0]["ask_price"]
 
-def get_ma15(ticker):
+def get_ma(ticker):
     """이동 평균선 조회"""
     df = pyupbit.get_ohlcv(ticker, interval=set_interval, count=set_ma_count)
-    ma = df['close'].rolling(set_ma_count).mean().iloc[-1]
+    ma = df['low'].rolling(set_ma_count).mean().iloc[-1]
     return ma
 
 
@@ -88,7 +88,7 @@ while True:
         set_rsi = rsi.iloc[-1]
 
         if bitcoin_ma_switch == 1:
-            ma = get_ma15("KRW-"+set_ticker)
+            ma = get_ma("KRW-"+set_ticker)
             current_price = get_current_price("KRW-"+set_ticker)
             
             if current_price > ma:
